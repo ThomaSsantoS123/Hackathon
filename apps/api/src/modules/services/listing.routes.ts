@@ -17,6 +17,7 @@ listingsRouter.get(
       type: q.type === 'OFFER' || q.type === 'REQUEST' ? q.type : undefined,
       reachableOnly: q.reachableOnly === 'true',
       mine: q.mine === 'true',
+      ownerId: typeof q.owner === 'string' && q.owner ? q.owner : undefined,
       maxHops: typeof q.maxHops === 'string' && q.maxHops ? Number(q.maxHops) : undefined,
     });
     res.json({ listings, categories: SERVICE_CATEGORIES });

@@ -330,7 +330,6 @@ export async function confirmCompletion(tx: Tx, ctx: Ctx, id: string, memberId: 
   const ex = await lockedExchange(tx, id);
   assertParty(ex, memberId);
   if (ex.status === 'SETTLED') throw new AppError('ALREADY_DONE', 'This exchange is already settled; nothing was paid twice.', MODULE, undefined, 409);
-  if (ex.status !== 'ACCEPTED') assertTransition(exchangeMachine, ex.status, 'SETTLED', 'confirm completion');
   if (ex.status !== 'ACCEPTED') {
     throw new AppError('INVALID_TRANSITION', `Completion can only be confirmed while the exchange is ACCEPTED (it is ${ex.status}).`, MODULE);
   }

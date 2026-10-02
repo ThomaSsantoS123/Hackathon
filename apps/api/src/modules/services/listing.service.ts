@@ -105,14 +105,14 @@ export async function discoverListings(
   db: Db,
   viewerId: string,
   now: Date,
-  f: { category?: string; type?: 'OFFER' | 'REQUEST'; reachableOnly?: boolean; mine?: boolean; maxHops?: number },
+  f: { category?: string; type?: 'OFFER' | 'REQUEST'; reachableOnly?: boolean; mine?: boolean; maxHops?: number; ownerId?: string },
 ): Promise<ListingView[]> {
   const rows = await db.listing.findMany({
     where: {
       status: 'OPEN',
       ...(f.category ? { category: f.category } : {}),
       ...(f.type ? { type: f.type } : {}),
-      ...(f.mine ? { ownerId: viewerId } : {}),
+      ...(f.mine ? { ownerId: viewerId } : f.ownerId ? { ownerId: f.ownerId } : {}),
       owner: { status: 'ACTIVE' },
     },
     include: { owner: true },
