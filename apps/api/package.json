@@ -12,7 +12,9 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:generate": "prisma generate",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "db:seed-if-empty": "tsx prisma/seed-if-empty.ts",
+    "start:prod": "prisma migrate deploy && tsx prisma/seed-if-empty.ts && tsx src/server.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

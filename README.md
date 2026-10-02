@@ -38,6 +38,10 @@ Without Docker: point `DATABASE_URL` in `apps/api/.env` at any PostgreSQL databa
 | `npm run build` | Production build of the web app |
 | `npx tsx apps/api/scripts/inspect.ts` | Print balances, scores, edges and disputes, and check the lot invariant |
 
+### Deploying
+
+Web on **Cloudflare Pages** (with an `/api` proxy function), API + PostgreSQL on **Render** via `render.yaml`. Step by step: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+
 ### Stack
 
 React 18 + TypeScript + Vite + Tailwind CSS + React Flow (`@xyflow/react`) on the front end. Node.js + Express + TypeScript + Prisma 6 + PostgreSQL on the back end. JWT auth with bcrypt-hashed passwords. Zod schemas in `packages/shared` validate requests on the server and inform the web forms. npm workspaces: `apps/web`, `apps/api`, `packages/shared`.
